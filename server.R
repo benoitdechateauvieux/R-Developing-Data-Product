@@ -7,6 +7,11 @@ fit.red     <- lm(quality~sulphates+alcohol+volatile.acidity, red.wines)
 fit.white   <- lm(quality~sulphates+alcohol+volatile.acidity, white.wines)
 
 quality <- function(input) {
+        if (input$type == 'white') {
+                fit   <- fit.white
+        } else {
+                fit   <- fit.red
+        }
         round(predict(fit, data.frame(volatile.acidity=input$acidity, 
                                       sulphates=input$sulphates, 
                                       alcohol=input$alcohol))
@@ -18,11 +23,9 @@ shinyServer(
                 output$hist <- renderPlot({
                         if (input$type == 'white') {
                                 wines <- white.wines
-                                fit   <- fit.white
                                 color <- "LightYellow"
                         } else {
                                 wines <- red.wines
-                                fit   <- fit.red
                                 color <- "pink"
                         }
                         ggplot(wines, stat="bin", aes(x=quality)) + 

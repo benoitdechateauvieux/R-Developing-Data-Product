@@ -8,9 +8,9 @@ shinyUI(
                         radioButtons(inputId='type', label='Type of wine', 
                                     choices=c('red', 'white'), selected='red', inline=T),
                         sliderInput(inputId='acidity', label='Volatile acidity', 
-                                    min=0.1, max=1.6, value=0.52),
+                                    min=0.1, max=2, value=0.52),
                         sliderInput(inputId='sulphates', label='Sulphates',
-                                     min=0.3, max=2.1, value=0.65),
+                                     min=0.1, max=2.5, value=0.65),
                         sliderInput(inputId='alcohol', label='Alcohol', 
                                     min=8, max=16, value=10.42)
                 ),
