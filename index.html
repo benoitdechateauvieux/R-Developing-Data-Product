@@ -26,11 +26,11 @@
 </article>
 
 <article class="" id="slide-2" style="background:;">
-  <h3>How it works ?</h3>
+  <h3>How to use the Wine Predictor ?</h3>
   <ol>
 <li>Go to <a href="https://benoit.shinyapps.io/WinePredictor/">https://benoit.shinyapps.io/WinePredictor/</a></li>
 <li>Fill the attributes in the left panel</li>
-<li>See the expected quality of your wine and positions your wine in the distribution of the wines of the same type (red or white).</li>
+<li>See the predicted quality of your wine and position your wine in the distribution of the wines of the same type (red or white).</li>
 </ol>
 
 <p><img src="screenshot.jpg" alt="Wine Predictor"></p>
@@ -38,7 +38,7 @@
 </article>
 
 <article class="" id="slide-3" style="background:;">
-  <h3>Prediction of the quality #1</h3>
+  <h3>How it works ? Prediction of the quality #1</h3>
   <p>We obtained two datasets, related to red and white variants of the Portuguese &quot;Vinho Verde&quot; wine, from <a href="https://archive.ics.uci.edu/ml/datasets/Wine+Quality">UCI Machine Learning Repository</a> website.</p>
 
 <pre><code class="r">red.wines &lt;- read.csv(&quot;winequality-red.csv&quot;, sep = &quot;;&quot;)
@@ -63,7 +63,7 @@ str(red.wines)
 </article>
 
 <article class="" id="slide-4" style="background:;">
-  <h3>Prediction of the quality #2</h3>
+  <h3>How it works ? Prediction of the quality #2</h3>
   <p>We selected 3 variables (sulphates, alcohol and volatile.acidity) as part of the &quot;best regressors&quot; using ANOVA method</p>
 
 <pre><code class="r">anova(lm(quality ~ ., red.wines))
@@ -92,10 +92,10 @@ str(red.wines)
 </article>
 
 <article class="" id="slide-5" style="background:;">
-  <h3>Prediction of the quality #3</h3>
-  <p>Base on those 2 models, we predict the quality of the wine when a input variable changes on the website:</p>
+  <h3>How it works ? Prediction of the quality #3</h3>
+  <p>Based on those 2 models (red and white), we predict the quality of the wine when an input variable changes on the website:</p>
 
-<pre><code class="r"># Simulated input data from GUI
+<pre><code class="r"># Simulated input data from the GUI
 input &lt;- data.frame(acidity = 0.5168, sulphates = 0.6528, alcohol = 10)
 </code></pre>
 
@@ -103,14 +103,13 @@ input &lt;- data.frame(acidity = 0.5168, sulphates = 0.6528, alcohol = 10)
 fit     &lt;- lm(quality~sulphates+alcohol+volatile.acidity, red.wines)
 # The predicted quality
 quality &lt;- round(predict(fit, data.frame(volatile.acidity=input$acidity, 
-                                      sulphates=input$sulphates, 
-                                      alcohol=input$alcohol))
+                                         sulphates=input$sulphates, 
+                                         alcohol=input$alcohol))
                  ,1)
-quality
+quality[[1]]
 </code></pre>
 
-<pre><code>##   1 
-## 5.5
+<pre><code>## [1] 5.5
 </code></pre>
 
 </article>
